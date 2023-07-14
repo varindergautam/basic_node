@@ -2,6 +2,8 @@ const express = require('express')
 const app = express()
 const port = 3000;
 
+const verifyToken = require('./helper/verifyToken');
+
 const mongoose = require('mongoose');
 
 //Database
@@ -31,6 +33,9 @@ app.use('/api/v1/auth', authRouteApi);
 
 const userRouteApi = require('./routes/api/v1/UserRoute');
 app.use('/api/v1/user', userRouteApi);
+
+const categoryRouteApi = require('./routes/api/v1/CategoryRoute');
+app.use('/api/v1/category', categoryRouteApi);
 
 
 app.listen(port, () => {

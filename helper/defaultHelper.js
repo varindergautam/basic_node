@@ -1,8 +1,8 @@
 
 const jwt = require('jsonwebtoken');
 
-function jwtToken(email) {
-  return jwt.sign({ email }, 'secretKey', { expiresIn: '1h' })
+function jwtToken(data) {
+  return jwt.sign({ data }, 'secretKey', { expiresIn: '1h' })
 }
 
 

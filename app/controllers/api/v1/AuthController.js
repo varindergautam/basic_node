@@ -4,6 +4,13 @@ const User = require("../../../models/User");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
+function passDataToToken(checkUser) {
+  return {
+    id: checkUser.id,
+    email: checkUser.email,
+  };
+}
+
 const login = async (req, res, next) => {
   try {
     // Define a schema for validation
@@ -49,7 +56,7 @@ const login = async (req, res, next) => {
         checkUser.password,
         function (err, result) {
           if (result) {
-            checkUser.token = defaultHelper.jwtToken(email);
+            checkUser.token = defaultHelper.jwtToken(passDataToToken(checkUser));
             // Save the updated user object to the database
             checkUser.save();
 
@@ -129,7 +136,7 @@ const register = async (req, res, next) => {
             return defaultHelper.sendResponse(res, statusCode, response);
           } else {
             const user = new User(userData);
-            user.token = defaultHelper.jwtToken(email);
+            user.token = defaultHelper.jwtToken(passDataToToken(user));
             user
               .save()
               .then(() => {
