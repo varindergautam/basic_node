@@ -3,6 +3,8 @@ const app = express()
 const port = 3000;
 
 const verifyToken = require('./helper/verifyToken');
+// const bodyParser = require('body-parser');
+// app.use(bodyParser.raw({ type: 'application/json', limit: '10mb' }));
 
 const mongoose = require('mongoose');
 
@@ -17,6 +19,9 @@ mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
   .catch((error) => {
     console.error('Failed to connect to the MongoDB server', error);
   });
+
+  // app.use(express.raw({ type: 'image/*' }));
+  // app.use(express.raw({ type: ['image/png', 'image/jpeg'], limit: '10mb' }));
 
 // Middleware to parse JSON in the request body
 app.use(express.json());
